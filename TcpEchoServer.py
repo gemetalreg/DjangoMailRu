@@ -7,7 +7,7 @@ PORT = 2222
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 sock.bind((IP, PORT))
-sock.listen()
+sock.listen(10)
 
 while True:
     conn, addr = sock.accept()
