@@ -3,9 +3,8 @@
 mkdir -p /home/box/web/{public,uploads,etc}
 mkdir -p /home/box/web/public/{img,css,js}
 
-empty = "empty.txt"
-touch /home/box/web/{public/$(empty),uploads/$(empty),etc/$(empty)}
-touch /home/box/web/public/{img/$(empty),css/$(empty),js/$(empty)}
+touch /home/box/web/{public/empty.txt,uploads/empty.txt,etc/empty.txt}
+touch /home/box/web/public/{img/empty.txt,css/empty.txt,js/empty.txt}
 
 cp -pf /etc/nginx/nginx.conf /home/box/web/etc/nginx.conf
 
