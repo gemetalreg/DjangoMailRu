@@ -1,15 +1,8 @@
 #!/usr/bin/env python
 
 import socket
-from multiprocessing import Process
-
-IP = "0.0.0.0"
-PORT = 2222
-NUM_OF_PROCS = 10
-
-sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-sock.bind((IP, PORT))
-sock.listen(10)
+from multiprocessing import Process, freeze_support
+import os
 
 def worker(sock):
     while True:
@@ -23,16 +16,28 @@ def worker(sock):
             conn.send(data)
         conn.close()
 
+if __name__ == "__main__":
 
-procs = []
+    if os.name == "nt":
+        freeze_support()
 
-for _ in xrange(NUM_OF_PROCS):
-    proc = Process(target = worker, args = (sock,))
-    procs.append(proc)
+    IP = "0.0.0.0"
+    PORT = 2222
+    NUM_OF_PROCS = 10
 
-for pr in procs:
-    pr.start()
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    sock.bind((IP, PORT))
+    sock.listen(10)
 
-for pr in procs:
-    pr.join()
+    procs = []
+
+    for _ in xrange(NUM_OF_PROCS):
+        proc = Process(target = worker, args = (sock,))
+        procs.append(proc)
+
+    for pr in procs:
+        pr.start()
+
+    for pr in procs:
+        pr.join()
 
