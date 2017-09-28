@@ -11,11 +11,11 @@ sock.listen(10)
 
 while True:
     conn, addr = sock.accept()
-    while True:
-        data = conn.recv(1024)
+    with conn:
+        while True:
+            data = conn.recv(1024)
 
-        if data == "close":
-            break
+            if data == "close":
+                break
 
-        conn.send(data)
-    conn.close()
+            conn.send(data)
