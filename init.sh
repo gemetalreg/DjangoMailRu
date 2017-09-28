@@ -7,4 +7,8 @@ sudo /etc/init.d/nginx restart
 sudo ln -sf /home/box/web/etc/gunicorn.conf /etc/gunicorn.d/test
 sudo /etc/init.d/gunicorn restart
 
+cd /home/box/web
+git config --global user.email "itunereg@gmail.com"
+git config --global user.name "gemetalreg"
+
 #sudo /etc/init.d/mysql start

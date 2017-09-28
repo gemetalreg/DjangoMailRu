@@ -18,6 +18,7 @@
 
 cd /home/box/web
 django-admin startproject ask
+cd ask
 python manage.py startapp qa
 
 #bash /home/box/web/init.sh
