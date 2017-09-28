@@ -16,9 +16,9 @@
 
 #git clone https://github.com/gemetalreg/DjangoMailRu.git /home/box/web
 
-#cd /home/box/web
-#django-admin startproject ask
-#python manage.py startapp qa
+cd /home/box/web
+django-admin startproject ask
+python manage.py startapp qa
 
 #bash /home/box/web/init.sh
 
