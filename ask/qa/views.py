@@ -4,3 +4,6 @@ from django.http import HttpResponse
 # Create your views here.
 def test(request, *args, **kwargs):
     return HttpResponse('OK')
+
+def fail404(request, *args, **kwargs):
+    return HttpResponse(status = 404,)
