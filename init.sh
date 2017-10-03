@@ -18,5 +18,7 @@ mysql -u root -e "CREATE USER 'myprojectuser'@'localhost' IDENTIFIED BY 'passwor
 mysql -u root -e "GRANT ALL PRIVILEGES ON myproject.* TO 'myprojectuser'@'localhost' WITH GRANT OPTION;"
 mysql -u root -e "FLUSH PRIVILEGES;"
 
+cd ask
+
 python manage.py makemigrations
 python manage.py migrate
