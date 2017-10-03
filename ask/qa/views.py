@@ -1,9 +1,9 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseNotFound
 
 # Create your views here.
 def test(request, *args, **kwargs):
     return HttpResponse('OK')
 
 def fail404(request, *args, **kwargs):
-    return HttpResponse(status = 404,)
+    return HttpResponseNotFound()

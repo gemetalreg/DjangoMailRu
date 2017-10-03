@@ -12,4 +12,11 @@ sudo /etc/init.d/nginx restart
 sudo ln -sf /home/box/web/etc/gunicorn.conf /etc/gunicorn.d/test
 sudo /etc/init.d/gunicorn restart
 
-#sudo /etc/init.d/mysql start
+sudo /etc/init.d/mysql restart
+mysql -u root -e "CREATE DATABASE myproject CHARACTER SET UTF8;"
+mysql -u root -e "CREATE USER 'myprojectuser'@'localhost' IDENTIFIED BY 'password';"
+mysql -u root -e "GRANT ALL PRIVILEGES ON myproject.* TO 'myprojectuser'@'localhost' WITH GRANT OPTION;"
+mysql -u root -e "FLUSH PRIVILEGES;"
+
+python manage.py makemigrations
+python manage.py migrate
