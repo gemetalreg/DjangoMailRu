@@ -12,7 +12,7 @@ def fail404(request, *args, **kwargs):
     return HttpResponseNotFound()
 
 def new_questions(request, *args, **kwargs):
-    questions = Question.objects.new_by_id()
+    questions = Question.objects.order_by('-id')
     limit = 10
     paginator = Paginator(questions, limit)
 
