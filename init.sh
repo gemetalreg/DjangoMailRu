@@ -16,12 +16,12 @@ sudo /etc/init.d/nginx stop
 
 sudo python /home/box/web/ask/manage.py runserver 0.0.0.0:80
 
-sudo /etc/init.d/mysql restart
-# mysql -u root -e "DROP DATABASE ASK"
-mysql -u root -e "CREATE DATABASE myproject CHARACTER SET UTF8;"
-mysql -u root -e "CREATE USER 'myprojectuser'@'localhost' IDENTIFIED BY 'password';"
-mysql -u root -e "GRANT ALL PRIVILEGES ON myproject.* TO 'myprojectuser'@'localhost';"
-mysql -u root -e "FLUSH PRIVILEGES;"
+#sudo /etc/init.d/mysql restart
+#mysql -u root -e "DROP DATABASE ASK"
+#mysql -u root -e "CREATE DATABASE myproject CHARACTER SET UTF8;"
+#mysql -u root -e "CREATE USER 'myprojectuser'@'localhost' IDENTIFIED BY 'password';"
+#mysql -u root -e "GRANT ALL PRIVILEGES ON myproject.* TO 'myprojectuser'@'localhost';"
+#mysql -u root -e "FLUSH PRIVILEGES;"
 
 cd ask
 
