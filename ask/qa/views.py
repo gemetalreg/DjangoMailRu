@@ -1,11 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseNotFound
 from .models import Question, Answer
 from django.core.paginator import Paginator
 
 # Create your views here.
 def test(request, *args, **kwargs):
-    # return render(request, 'some.html', {})
     return HttpResponse('OK')
 
 def fail404(request, *args, **kwargs):
@@ -36,12 +35,10 @@ def popular(request, *args, **kwargs):
     })
 
 def one_question(request, qid):
-    try:
-        quest = Question.objects.get(pk=qid)
-        return render(request, 'qa/question.html', {
-            "title" : quest.title,
-            "text" : quest.text,
-            "answers" : Answer.objects.filter(question = qid)
-        })
-    except:
-        return HttpResponseNotFound()
+    quest = get_object_or_404(Question, pk=qid)
+    answers = quest.answer_set.all()
+    return render(request, 'qa/question.html', {
+        "title" : quest.title,
+        "text" : quest.text,
+        "answers" : answers
+    })
