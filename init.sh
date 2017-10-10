@@ -5,11 +5,11 @@ cd /home/box/web
 git config --global user.email "itunereg@gmail.com"
 git config --global user.name "gemetalreg"
 
-sudo /etc/init.d/nginx stop
+#sudo /etc/init.d/nginx stop
 
-#sudo rm -rf /etc/nginx/sites-enabled/default
-#sudo ln -sf /home/box/web/etc/nginx.conf /etc/nginx/sites-enabled/test.conf
-#sudo /etc/init.d/nginx restart
+sudo rm -rf /etc/nginx/sites-enabled/default
+sudo ln -sf /home/box/web/etc/nginx.conf /etc/nginx/sites-enabled/test.conf
+sudo /etc/init.d/nginx restart
 
 #sudo ln -sf /home/box/web/etc/gunicorn.conf /etc/gunicorn.d/test
 #sudo /etc/init.d/gunicorn restart
@@ -26,4 +26,4 @@ cd ask
 python manage.py makemigrations
 python manage.py migrate
 
-sudo python /home/box/web/ask/manage.py runserver 0.0.0.0:80
+sudo python /home/box/web/ask/manage.py runserver 0.0.0.0:8000
