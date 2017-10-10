@@ -12,7 +12,7 @@ def fail404(request, *args, **kwargs):
 
 def get_page(request):
     try:
-        page_str = request.Get.get('page', 1)
+        page_str = request.GET.get('page', 1)
         page = int(page_str)
         return page
     except ValueError:
