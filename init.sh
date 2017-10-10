@@ -14,8 +14,6 @@ sudo /etc/init.d/nginx stop
 #sudo ln -sf /home/box/web/etc/gunicorn.conf /etc/gunicorn.d/test
 #sudo /etc/init.d/gunicorn restart
 
-sudo python /home/box/web/ask/manage.py runserver 0.0.0.0:80
-
 #sudo /etc/init.d/mysql restart
 #mysql -u root -e "DROP DATABASE ASK"
 #mysql -u root -e "CREATE DATABASE myproject CHARACTER SET UTF8;"
@@ -27,3 +25,5 @@ cd ask
 
 python manage.py makemigrations
 python manage.py migrate
+
+sudo python /home/box/web/ask/manage.py runserver 0.0.0.0:80
