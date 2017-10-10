@@ -27,7 +27,7 @@ def get_page_obj(paginator, page):
         return page_obj
 
 def new_questions(request, *args, **kwargs):
-    questions = Question.objects.order_by('-pk')
+    questions = Question.objects.order_by('-id')
     limit = 10
     paginator = Paginator(questions, limit)
 
