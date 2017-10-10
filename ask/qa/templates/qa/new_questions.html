@@ -1,15 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
 <head>
-    <meta charset="UTF-8">
     <title>QA</title>
 </head>
 <body>
     <nav>
         <ul>
-            {% for quest in questions_on_page %}
+            {% for question in questions %}
                 <li>
-                    <a href="{{quest.get_url}}">
+                    <a href="/question/{{ question.id }}/">
                         {{ quest.title }}
                     </a>
                 </li>
