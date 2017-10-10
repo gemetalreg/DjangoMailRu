@@ -5,12 +5,16 @@ cd /home/box/web
 git config --global user.email "itunereg@gmail.com"
 git config --global user.name "gemetalreg"
 
-sudo rm -rf /etc/nginx/sites-enabled/default
-sudo ln -sf /home/box/web/etc/nginx.conf /etc/nginx/sites-enabled/test.conf
-sudo /etc/init.d/nginx restart
+sudo /etc/init.d/nginx stop
 
-sudo ln -sf /home/box/web/etc/gunicorn.conf /etc/gunicorn.d/test
-sudo /etc/init.d/gunicorn restart
+#sudo rm -rf /etc/nginx/sites-enabled/default
+#sudo ln -sf /home/box/web/etc/nginx.conf /etc/nginx/sites-enabled/test.conf
+#sudo /etc/init.d/nginx restart
+
+#sudo ln -sf /home/box/web/etc/gunicorn.conf /etc/gunicorn.d/test
+#sudo /etc/init.d/gunicorn restart
+
+sudo python /home/box/web/ask/manage.py runserver 0.0.0.0:80
 
 sudo /etc/init.d/mysql restart
 # mysql -u root -e "DROP DATABASE ASK"
