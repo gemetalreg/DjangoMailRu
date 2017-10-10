@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>QA</title>
+</head>
+<body>
+    <nav>
+        <ul>
+            {% for quest in questions_on_page %}
+                <li>
+                    <a href="{{quest.get_url}}">
+                        {{ quest.title }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </nav>
+</body>
+</html>
