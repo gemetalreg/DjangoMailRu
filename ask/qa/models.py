@@ -8,6 +8,9 @@ class QuestionManager(models.Manager):
     def new(self):
         return self.order_by('-added_at')
 
+    def new_id(self):
+        return self.order_by('-id')
+
     def popular(self):
         return self.order_by('-rating')
 

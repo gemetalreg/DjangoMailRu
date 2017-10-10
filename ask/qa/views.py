@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse, HttpResponseNotFound
+from django.http import HttpResponse, HttpResponseNotFound, Http404
 from .models import Question, Answer
 from django.core.paginator import Paginator
 
@@ -10,12 +10,20 @@ def test(request, *args, **kwargs):
 def fail404(request, *args, **kwargs):
     return HttpResponseNotFound()
 
+def get_page(request):
+    try:
+        page_str = request.Get.get('page', 1)
+        page = int(page_str)
+        return page
+    except ValueError:
+        raise Http404
+
 def new_questions(request, *args, **kwargs):
     questions = Question.objects.order_by('-id')
     limit = 10
     paginator = Paginator(questions, limit)
 
-    page = request.Get.get('page', 1)
+    page = get_page(request)
     page_obj = paginator.page(page)
 
     return render(request, 'qa/new_questions.html', {
@@ -27,7 +35,7 @@ def popular(request, *args, **kwargs):
     limit = 10
     paginator = Paginator(questions, limit)
 
-    page = request.Get.get('page', 1)
+    page = get_page(request)
     page_obj = paginator.page(page)
 
     return render(request, 'qa/popular_questions.html', {
