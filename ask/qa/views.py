@@ -17,12 +17,10 @@ def new_questions(request, *args, **kwargs):
     paginator = Paginator(questions, limit)
 
     page = request.Get.get('page', 1)
-    paginator.baseurl = '/question/'
     page_obj = paginator.page(page)
+
     return render(request, 'qa/new_questions.html', {
-        'questions_on_page' : page_obj.object_list,
-        'paginator' : paginator,
-        'page': page
+        'questions_on_page' : page_obj.object_list
     })
 
 def popular(request, *args, **kwargs):
@@ -32,10 +30,9 @@ def popular(request, *args, **kwargs):
 
     page = request.Get.get('page', 1)
     page_obj = paginator.page(page)
+
     return render(request, 'qa/popular_questions.html', {
-        'questions_on_page' : page_obj.object_list,
-        'paginator' : paginator,
-        'page': page
+        'questions_on_page' : page_obj.object_list
     })
 
 def one_question(request, qid):
