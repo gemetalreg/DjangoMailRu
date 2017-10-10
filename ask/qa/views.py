@@ -31,7 +31,7 @@ def new_questions(request, *args, **kwargs):
     })
 
 def popular(request, *args, **kwargs):
-    questions = Question.objects.popular()
+    questions = Question.objects.order_by('-rating')
     limit = 10
     paginator = Paginator(questions, limit)
 
