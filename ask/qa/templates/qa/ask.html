@@ -8,7 +8,7 @@
   <form class="form-horizontal" method="POST" action="/ask/">
       <fieldset>
           {% csrf_token %}
-          {% form.as_p %}
+          {{ form.as_p }}
       </fieldset>
 
       <div class="form-actions">
