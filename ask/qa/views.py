@@ -1,7 +1,9 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse, HttpResponseNotFound, Http404
+from django.http import HttpResponse, HttpResponseNotFound, Http404, HttpResponseRedirect
 from .models import Question, Answer
 from django.core.paginator import Paginator, EmptyPage
+from django.views.decorators.http import require_GET
+from .forms import AskForm, AnswerForm
 
 # Create your views here.
 def test(request, *args, **kwargs):
@@ -26,6 +28,7 @@ def get_page_obj(paginator, page):
     finally:
         return page_obj
 
+@require_GET
 def new_questions(request, *args, **kwargs):
     questions = Question.objects.order_by('-id')
     limit = 10
@@ -38,6 +41,7 @@ def new_questions(request, *args, **kwargs):
         'questions' : page_obj
     })
 
+@require_GET
 def popular(request, *args, **kwargs):
     questions = Question.objects.order_by('-rating')
     limit = 10
@@ -51,10 +55,43 @@ def popular(request, *args, **kwargs):
     })
 
 def one_question(request, qid):
+    # fork for both POST and GET
     quest = get_object_or_404(Question, pk=qid)
     answers = quest.answer_set.all()
-    return render(request, 'qa/question.html', {
+    form = AnswerForm(initial={'question': qid})
+    params = {
         "title" : quest.title,
         "text" : quest.text,
-        "answers" : answers
-    })
+        "answers" : answers,
+        "question" : quest,
+        "form" : form
+    }
+    return render(request, 'qa/question.html', params)
+
+def ask(request):
+    if request.method == "POST":
+        form = AskForm(request.POST)
+        if form.is_valid():
+            askModel = form.save()
+            url = askModel.get_url()
+            return HttpResponseRedirect(url)
+        else:
+            return render(request, 'qa/ask.html', {
+            'form' : form
+        })
+    else:
+        # request.method == "GET"
+        empty_form = AskForm()
+        return render(request, 'qa/ask.html', {
+            'form' : empty_form
+        })
+
+def answer(request):
+    if request.method == "POST":
+        form = AnswerForm(request.POST)
+        if form.is_valid():
+            answerModel = form.save()
+            url = answerModel.get_url()
+            return HttpResponseRedirect(url)
+    return HttpResponseRedirect('/')
+

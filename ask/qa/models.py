@@ -37,6 +37,9 @@ class Answer(models.Model):
     question = models.ForeignKey(Question, on_delete = models.CASCADE)
     author = models.ForeignKey(User, on_delete = models.CASCADE)
 
+    def get_url(self):
+        return reverse('question', kwargs={'qid': self.question.id})
+
     def __unicode__(self):
         return self.text
 
