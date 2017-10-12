@@ -29,7 +29,7 @@ class Question(models.Model):
         return self.title
 
     def get_url(self):
-        return "/question/%s/" % self.id
+        return "/question/%s/" % self.pk
 
 class Answer(models.Model):
     text = models.TextField()
