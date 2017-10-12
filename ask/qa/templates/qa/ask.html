@@ -9,7 +9,7 @@
   <div class="alert alert-danger">{{ e }}</div>
 {% endfor %}
 
-  <form class="form-horizontal" method="POST" action="/answer/">
+  <form class="form-horizontal" method="POST" action="{{ question.get_url }}">
       <fieldset>
           {% csrf_token %}
           {% for field in form %}
