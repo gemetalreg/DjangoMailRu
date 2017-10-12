@@ -2,12 +2,6 @@ from django import forms
 from .models import Question, Answer
 from django.shortcuts import get_object_or_404
 
-def is_epmty(some_str, er_mes):
-    return (some_str == "", u"Empty %s" % er_mes)
-
-def is_correct_len(some_str, er_mes, max_length = 255):
-    return (some_str > max_length, u"To much %s lenght" % er_mes)
-
 class AskForm(forms.Form):
     def __init__(self, *args, **kwargs):
         super(AskForm, self).__init__(*args, **kwargs)
@@ -15,37 +9,33 @@ class AskForm(forms.Form):
     title = forms.CharField(max_length=255)
     text = forms.CharField(widget=forms.Textarea)
 
-    def clean_title(self):
-        try:
-            data_title = self.cleaned_data['title']
-        except KeyError:
-            raise forms.ValidationError(u"No title")
+    # def clean_title(self):
+    #     data_title = self.cleaned_data['title']
+    #
+    #     clear_title = data_title.strip()
+    #
+    #     for error in errors_list:
+    #         error_res, error_mes = error(clear_title, u"title")
+    #         if error_res:
+    #             raise forms.ValidationError(error_mes)
+    #
+    #     return data_title
+    #
+    # def clean_text(self):
+    #     data_text = self.cleaned_data['text']
+    #
+    #     clear_text = data_text.strip()
+    #     errors_list = [is_epmty]
+    #
+    #     for error in errors_list:
+    #         error_res, error_mes = error(clear_text, u"text")
+    #         if error_res:
+    #             raise forms.ValidationError(error_mes)
+    #
+    #     return data_text
 
-        clear_title = data_title.strip()
-        errors_list = [is_epmty, is_correct_len]
-
-        for error in errors_list:
-            error_res, error_mes = error(clear_title, u"title")
-            if error_res:
-                raise forms.ValidationError(error_mes)
-
-        return data_title
-
-    def clean_text(self):
-        try:
-            data_text = self.cleaned_data['text']
-        except KeyError:
-            raise forms.ValidationError(u"No text")
-
-        clear_text = data_text.strip()
-        errors_list = [is_epmty]
-
-        for error in errors_list:
-            error_res, error_mes = error(clear_text, u"text")
-            if error_res:
-                raise forms.ValidationError(error_mes)
-
-        return data_text
+    def clean(self):
+        pass
 
     def save(self):
         question = Question(**self.cleaned_data)
@@ -56,35 +46,32 @@ class AnswerForm(forms.Form):
     text = forms.CharField(widget=forms.Textarea)
     question = forms.IntegerField(forms.HiddenInput)
 
-    def clean_text(self):
-        try:
-            data_text = self.cleaned_data['text']
-        except KeyError:
-            raise forms.ValidationError(u"No text")
+    # def clean_text(self):
+    #     data_text = self.cleaned_data['text']
+    #
+    #     clear_text = data_text.strip()
+    #     errors_list = [is_epmty]
+    #
+    #     for error in errors_list:
+    #         error_res, error_mes = error(clear_text, u"text")
+    #         if error_res:
+    #             raise forms.ValidationError(error_mes)
+    #
+    #     return data_text
+    #
+    # def clean_question(self):
+    #
+    #     data_question = self.cleaned_data['question']
+    #
+    #     try:
+    #         int_question = int(data_question)
+    #     except ValueError:
+    #         raise forms.ValidationError(u"Invalid question")
+    #
+    #     return int_question
 
-        clear_text = data_text.strip()
-        errors_list = [is_epmty]
-
-        for error in errors_list:
-            error_res, error_mes = error(clear_text, u"text")
-            if error_res:
-                raise forms.ValidationError(error_mes)
-
-        return data_text
-
-    def clean_question(self):
-
-        try:
-            data_question = self.cleaned_data['question']
-        except KeyError:
-            raise forms.ValidationError(u"No question")
-
-        try:
-            int_question = int(data_question)
-        except ValueError:
-            raise forms.ValidationError(u"Invalid question")
-
-        return int_question
+    def clean(self):
+        pass
 
     def save(self):
         self.cleaned_data['question'] = get_object_or_404(Question,
