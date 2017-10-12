@@ -9,6 +9,9 @@ def is_correct_len(some_str, er_mes, max_length = 255):
     return (some_str > max_length, u"To much %s lenght" % er_mes)
 
 class AskForm(forms.Form):
+    def __init__(self, *args, **kwargs):
+        super(AskForm, self).__init__(*args, **kwargs)
+
     title = forms.CharField(max_length=255)
     text = forms.CharField(widget=forms.Textarea)
 
