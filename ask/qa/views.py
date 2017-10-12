@@ -58,7 +58,15 @@ def one_question(request, qid):
     # fork for both POST and GET
     quest = get_object_or_404(Question, pk=qid)
     answers = quest.answer_set.all()
-    form = AnswerForm(initial={'question': qid})
+
+    if request.method == 'POST':
+        form = AnswerForm(request.POST)
+        if form.is_valid():
+            _ = form.save()
+            url = quest.get_url()
+            return HttpResponseRedirect(url)
+    else:
+        form = AnswerForm(initial={'question': quest.id})
     params = {
         "title" : quest.title,
         "text" : quest.text,
@@ -86,12 +94,12 @@ def ask(request):
             'form' : empty_form
         })
 
-def answer(request):
-    if request.method == "POST":
-        form = AnswerForm(request.POST)
-        if form.is_valid():
-            answerModel = form.save()
-            url = answerModel.get_url()
-            return HttpResponseRedirect(url)
-    return HttpResponseRedirect('/')
+# def answer(request):
+#     if request.method == "POST":
+#         form = AnswerForm(request.POST)
+#         if form.is_valid():
+#             answerModel = form.save()
+#             url = answerModel.get_url()
+#             return HttpResponseRedirect(url)
+#     return HttpResponseRedirect('/')
 

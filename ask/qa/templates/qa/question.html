@@ -16,5 +16,14 @@
         {% endfor %}
     </ul>
 
+    <form method="post" action="{{ question.get_url }}">
+        <fieldset>
+            {% csrf_token %}
+            {{ form.as_p }}
+        </fieldset>
+        <button type="submit">Ответить</button>
+    </form>
+
+
 </body>
 </html>

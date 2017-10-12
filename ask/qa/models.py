@@ -29,16 +29,13 @@ class Question(models.Model):
         return self.title
 
     def get_url(self):
-        return reverse('question', kwargs={'qid': self.pk})
+        return "/question/%s/" % self.id
 
 class Answer(models.Model):
     text = models.TextField()
     added_at = models.DateField(blank=True, auto_now_add = True)
     question = models.ForeignKey(Question, on_delete = models.CASCADE)
     author = models.ForeignKey(User, on_delete = models.CASCADE)
-
-    def get_url(self):
-        return reverse('question', kwargs={'qid': self.question.id})
 
     def __unicode__(self):
         return self.text
