@@ -9,7 +9,6 @@ urlpatterns = [
     url(r'^signup/', views.test),
     url(r'^question/(?P<qid>\d+)/', views.one_question, name='question'),
     url(r'^ask/', views.ask),
-    url(r'^answer/', views.answer),
     url(r'^popular/', views.popular),
     url(r'^new/', views.test),
     url(r"^", views.fail404)
