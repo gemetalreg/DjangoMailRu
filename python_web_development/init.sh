@@ -14,4 +14,4 @@ sudo cp /home/box/web/etc/nginx.conf /etc/nginx/conf.d/test.conf
 sudo rm -f /etc/nginx/sites-enabled/default
 
 # run nginx
-nginx -s reload
+sudo /etc/init.d/nginx restart
