@@ -13,11 +13,11 @@ sudo ln -sf /home/box/web/etc/nginx.conf /etc/nginx/sites-enabled/test.conf
 # delete default virtual host
 sudo rm -f /etc/nginx/sites-enabled/default
 
-# create weak link gunicorn
+# create weak link gunicorn conf named hello.py
 sudo ln -sf /home/box/web/etc/hello.py /etc/gunicorn.d/hello.py
 
 # run nginx
 sudo /etc/init.d/nginx restart
 
 # run gunicorn
-sudo gunicorn -b 0.0.0.0:8080 hello:app
+sudo gunicorn -c /etc/gunicorn.d/hello.py hello:app
