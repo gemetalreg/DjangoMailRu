@@ -14,11 +14,10 @@ sudo ln -sf /home/box/web/etc/nginx.conf /etc/nginx/sites-enabled/test.conf
 sudo rm -f /etc/nginx/sites-enabled/default
 
 # create weak link gunicorn conf named hello.py
-sudo ln -sf /home/box/web/etc/hello.py /etc/gunicorn.d/hello.py
+# sudo ln -sf /home/box/web/etc/hello.py /etc/gunicorn.d/hello.py
 
 # run nginx
 sudo /etc/init.d/nginx restart
 
 # run gunicorn
-cd /home/box/web
-sudo gunicorn -c /etc/gunicorn.d/hello.py hello:app
+sudo gunicorn -c /home/box/web/etc/hello.py hello:app
