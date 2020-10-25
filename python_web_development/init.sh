@@ -7,8 +7,8 @@ sudo apt-get install nginx
 mkdir -p /home/box/web/public /home/box/web/uploads /home/box/web/etc
 mkdir -p /home/box/web/public/img /home/box/web/public/css /home/box/web/public/js
 
-# create weak link to sites-enabled
-sudo ln -sf /home/box/web/etc/nginx.conf /etc/nginx/sites-enabled/test.conf
+# copy config to conf.d
+sudo cp /home/box/web/etc/nginx.conf /etc/nginx/conf.d/test.conf
 
 # delete default virtual host
 sudo rm -f /etc/nginx/sites-enabled/default
