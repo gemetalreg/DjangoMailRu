@@ -8,7 +8,7 @@ mkdir -p /home/box/web/public /home/box/web/uploads /home/box/web/etc
 mkdir -p /home/box/web/public/img /home/box/web/public/css /home/box/web/public/js
 
 # create weak link to sites-enabled
-sudo ln -sf /home/box/web/etc/nginx.conf /etc/nginx/sites-enabled/test.conf
+sudo ln -sf /home/box/web/etc/nginx.conf /etc/nginx/conf.d/test.conf
 
 # delete default virtual host
 sudo rm -f /etc/nginx/sites-enabled/default
@@ -20,4 +20,4 @@ sudo rm -f /etc/nginx/sites-enabled/default
 sudo /etc/init.d/nginx restart
 
 # run gunicorn
-sudo gunicorn -c /home/box/web/etc/hello.py hello:app
+sudo gunicorn --chdir /home/box/web -c /home/box/web/etc/hello.py hello:app
